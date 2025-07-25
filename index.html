@@ -1,42 +1,201 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Baking with the Gemini API</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERITAS - Plataforma de Gestão de Riscos e Compliance</title>
+    <style>
+        :root {
+            --primary-blue: #1D4ED8;
+            --light-blue: #3b82f6;
+            --background-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header {
+            background: var(--card-bg);
+            padding: 20px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 80px 20px;
+            background-color: var(--card-bg);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #475569;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            padding: 15px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .cta-button:hover {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+        }
+
+        .features {
+            padding: 60px 0;
+        }
+        
+        .features-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border: 1px solid #e2e8f0;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-blue);
+            margin-top: 0;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--text-dark);
+            color: #94a3b8;
+        }
+    </style>
 </head>
-
 <body>
-  <main>
-    <h1>Baking with the Gemini API</h1>
-    <form>
-      <div class="image-picker">
-        <label class="image-choice">
-          <input type="radio" checked name="chosen-image" value="/baked_goods_1.jpg">
-          <img src="/baked_goods_1.jpg">
-        </label>
-        <label class="image-choice">
-          <input type="radio" name="chosen-image" value="/baked_goods_2.jpg">
-          <img src="/baked_goods_2.jpg">
-        </label>
-        <label class="image-choice">
-          <input type="radio" name="chosen-image" value="/baked_goods_3.jpg">
-          <img src="/baked_goods_3.jpg">
-        </label>
-      </div>
-      <div class="prompt-box">
-        <label>
-          <input name="prompt" placeholder="Enter instructions here" type="text"
-            value="Provide an example recipe for the baked goods in the image">
-        </label>
-        <button type="submit">Go</button>
-      </div>
-    </form>
-    <p class="output">(Results will appear here)</p>
-  </main>
 
-  <script type="module" src="/main.js"></script>
+    <header class="header">
+        <div class="logo">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo-icon">
+                <defs>
+                    <linearGradient id="shieldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1"></stop>
+                        <stop offset="100%" style="stop-color:#1D4ED8;stop-opacity:1"></stop>
+                    </linearGradient>
+                </defs>
+                <path d="M32 2 L58 14 V 30 C 58 46 46 56 32 62 C 18 56 6 46 6 30 V 14 L32 2 Z" fill="url(#shieldGradient)"></path>
+                <path d="M18 44 L26 36 L38 40 L48 28" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+                <path d="M43 28 L48 28 L48 33" stroke="white" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+            </svg>
+            <span class="logo-text">VERITAS</span>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Gestão Integrada de Riscos e Compliance</h1>
+                <p>
+                    VERITAS é uma plataforma robusta e segura para centralizar a identificação, avaliação e mitigação de riscos corporativos, garantindo a conformidade com as principais regulamentações do mercado.
+                </p>
+                <a href="https://veritas-compliance.web.app" class="cta-button" target="_blank" rel="noopener noreferrer">Acessar o Aplicativo</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="features-title">Funcionalidades Principais</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>Matriz de Riscos Centralizada</h3>
+                        <p>Visualize e gerencie todos os riscos operacionais, financeiros e regulatórios em uma única interface intuitiva, com análises de impacto e probabilidade.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Planos de Ação e Mitigação</h3>
+                        <p>Crie, atribua e monitore planos de ação detalhados para cada risco identificado, garantindo que as medidas corretivas sejam implementadas de forma eficaz e dentro do prazo.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Controle de Acesso por Perfil</h3>
+                        <p>Sistema de segurança granular com perfis (Admin, Compliance Officer, Operacional, Auditor) que define permissões específicas para cada usuário, garantindo a confidencialidade e integridade dos dados.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Trilha de Auditoria Completa</h3>
+                        <p>Rastreie cada alteração realizada no sistema. Todos os registros de criação, atualização e exclusão são logados com detalhes, fornecendo uma trilha de auditoria imutável.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Gerador de Documentos com IA</h3>
+                        <p>Gere atas de reunião e outros documentos formais com o auxílio de IA. Estruture discussões e extraia decisões e planos de ação automaticamente.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3>Relatórios e Dashboards</h3>
+                        <p>Exporte relatórios em PDF, incluindo gráficos e análises de inconsistências, para fornecer insights valiosos à alta gestão e aos auditores.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 VERITAS. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
 </body>
-
 </html>
